@@ -1,0 +1,107 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Employee_Input",
+						"type": "DatasetReference"
+					},
+					"name": "Employees"
+				},
+				{
+					"dataset": {
+						"referenceName": "Departments_data",
+						"type": "DatasetReference"
+					},
+					"name": "Departments"
+				},
+				{
+					"dataset": {
+						"referenceName": "Emp_dept_id",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDeptId"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ADLSGen2Output",
+						"type": "DatasetReference"
+					},
+					"name": "Empdeptdata"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Employee1"
+				},
+				{
+					"name": "Deparment1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeeID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Email as string,",
+				"          HireDate as string,",
+				"          Salary as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Employees",
+				"source(output(",
+				"          DepartmentID as integer,",
+				"          DepartmentName as string,",
+				"          Location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Departments",
+				"source(output(",
+				"          EmployeeID as integer,",
+				"          DepartmentID as integer,",
+				"          AssignedDate as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> EmpDeptId",
+				"Employees, EmpDeptId join(Employees@EmployeeID == EmpDeptId@EmployeeID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> Employee1",
+				"Employee1, Departments join(EmpDeptId@DepartmentID == Departments@DepartmentID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> Deparment1",
+				"Deparment1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          EmployeeID = Employees@EmployeeID,",
+				"          FirstName,",
+				"          LastName,",
+				"          Email,",
+				"          HireDate,",
+				"          Salary,",
+				"          EmployeeID = EmpDeptId@EmployeeID,",
+				"          DepartmentID = EmpDeptId@DepartmentID,",
+				"          DepartmentID = Departments@DepartmentID,",
+				"          DepartmentName,",
+				"          Location",
+				"     )) ~> Empdeptdata"
+			]
+		}
+	}
+}

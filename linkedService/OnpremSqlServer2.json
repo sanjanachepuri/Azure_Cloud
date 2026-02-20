@@ -1,0 +1,21 @@
+{
+	"name": "OnpremSqlServer2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "SanjanaXPS2024\\MSSQLSERVER01",
+			"database": "Practicedb",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "test",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5MDRhMjdmYy1mMjYzLTQzMjAtOGRlNy00ZDllMWI0YzZlM2YiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
