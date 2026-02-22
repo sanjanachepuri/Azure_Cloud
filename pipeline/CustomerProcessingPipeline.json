@@ -86,7 +86,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@empty(activity('Filter').output)",
+						"value": "@empty(activity('Filter').output.value)",
 						"type": "Expression"
 					},
 					"ifTrueActivities": [
@@ -114,7 +114,7 @@
 					{
 						"activity": "If Condition",
 						"dependencyConditions": [
-							"Completed"
+							"Failed"
 						]
 					}
 				],
