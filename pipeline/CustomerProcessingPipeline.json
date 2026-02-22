@@ -91,7 +91,7 @@
 					},
 					"ifTrueActivities": [
 						{
-							"name": "Set variable1",
+							"name": "SetNoFileMessage",
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
@@ -100,7 +100,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "No Files Found",
+								"variableName": "FileStatus",
 								"value": "No Files Found"
 							}
 						}
@@ -114,7 +114,7 @@
 					{
 						"activity": "If Condition",
 						"dependencyConditions": [
-							"Failed"
+							"Completed"
 						]
 					}
 				],
@@ -224,7 +224,7 @@
 			}
 		],
 		"variables": {
-			"No Files Found": {
+			"FileStatus": {
 				"type": "String"
 			}
 		},
