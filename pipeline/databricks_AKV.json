@@ -1,9 +1,9 @@
 {
-	"name": "Databricks_Notebook",
+	"name": "databricks_AKV",
 	"properties": {
 		"activities": [
 			{
-				"name": "CSV_Notebook",
+				"name": "Key Vault",
 				"type": "DatabricksNotebook",
 				"dependsOn": [],
 				"policy": {
@@ -15,16 +15,16 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/sanjana@premindurioutlook.onmicrosoft.com/Employeedepartments_csv"
+					"notebookPath": "/Users/sanjana@premindurioutlook.onmicrosoft.com/Key Vault"
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureDatabricks1",
+					"referenceName": "AzureDatabricks2",
 					"type": "LinkedServiceReference"
 				}
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2026-02-22T08:56:22Z"
+		"lastPublishTime": "2026-02-22T09:58:19Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

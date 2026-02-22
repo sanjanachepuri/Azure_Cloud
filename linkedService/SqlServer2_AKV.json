@@ -1,17 +1,24 @@
 {
-	"name": "OnpremSqlServer2",
+	"name": "SqlServer2_AKV",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"server": "SanjanaXPS2024\\MSSQLSERVER01",
+			"server": "SANJANAXPS2024\\MSSQLSERVER01",
 			"database": "Practicedb",
 			"encrypt": "optional",
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
 			"userName": "test",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0YzVlZmM3ZS01YTcwLTQ0YjEtOWY3NS1mNGFjNzUyN2E2YzEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault_sqlserver",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "scsqlserver"
+			}
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1",
