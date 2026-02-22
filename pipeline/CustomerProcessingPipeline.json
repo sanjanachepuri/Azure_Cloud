@@ -67,7 +67,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@startswith(item().name, 'person')",
+						"value": "@startsWith(item().name,'person')",
 						"type": "Expression"
 					}
 				}
@@ -143,7 +143,6 @@
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "Input",
 										"wildcardFileName": {
 											"value": "@item().name",
 											"type": "Expression"
