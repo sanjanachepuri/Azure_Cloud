@@ -212,7 +212,25 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "TransformCustomerData",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"fileName": {
+									"value": "@activity('Copy data1').output.value",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceParameters": {
+							"source1": {
+								"schemaLinkedService": {
+									"fileName": {
+										"value": "@activity('Copy data1').output.value",
+										"type": "Expression"
+									}
+								}
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
