@@ -1,0 +1,85 @@
+{
+	"name": "TransformCustomerData_copy1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ADLSGen2Input_Dynamic_copy1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "File_Output",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "sort1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID as string,",
+				"          Name as string,",
+				"          Department as string,",
+				"          Joining_Date as string,",
+				"          Salary as string,",
+				"          Bonus as string,",
+				"          Location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     wildcardPaths:['person*.csv']) ~> source1",
+				"source1 select(mapColumn(",
+				"          ID,",
+				"          Name,",
+				"          Age,",
+				"          City",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> select1",
+				"select1 filter(Age > 20) ~> filter1",
+				"filter1 derive(AgeGroup = iif(Age > 30,'Senior','Adult')) ~> derivedColumn1",
+				"derivedColumn1 sort(asc(Age, true)) ~> sort1",
+				"sort1 aggregate(groupBy(City),",
+				"     ID = count(ID)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          DepartmentID as string,",
+				"          DepartmentName as string,",
+				"          Location as string",
+				"     ),",
+				"     partitionFileNames:['processed_data.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
