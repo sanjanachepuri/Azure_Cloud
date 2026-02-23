@@ -40,7 +40,7 @@
 					{
 						"activity": "Get Metadata1",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -79,7 +79,7 @@
 					{
 						"activity": "Filter",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
