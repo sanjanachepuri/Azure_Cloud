@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ADLSGen2Input_Dynamic_copy1",
+						"referenceName": "ADLSGen2Output",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -39,16 +39,7 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          ID as string,",
-				"          Name as string,",
-				"          Department as string,",
-				"          Joining_Date as string,",
-				"          Salary as string,",
-				"          Bonus as string,",
-				"          Location as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     wildcardPaths:['person*.csv']) ~> source1",
