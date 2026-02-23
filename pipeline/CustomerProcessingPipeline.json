@@ -40,7 +40,7 @@
 					{
 						"activity": "Get Metadata1",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -223,8 +223,7 @@
 									"coreCount": 8,
 									"computeType": "General"
 								},
-								"traceLevel": "Fine",
-								"runConcurrently": false
+								"traceLevel": "Fine"
 							}
 						}
 					]
