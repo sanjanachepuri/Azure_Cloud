@@ -96,7 +96,7 @@
 							{
 								"activity": "Filter",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
