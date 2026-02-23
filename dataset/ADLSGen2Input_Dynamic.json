@@ -27,35 +27,6 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"name": "ID",
-				"type": "String"
-			},
-			{
-				"name": "Name",
-				"type": "String"
-			},
-			{
-				"name": "Department",
-				"type": "String"
-			},
-			{
-				"name": "Joining_Date",
-				"type": "String"
-			},
-			{
-				"name": "Salary",
-				"type": "String"
-			},
-			{
-				"name": "Bonus",
-				"type": "String"
-			},
-			{
-				"name": "Location",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
