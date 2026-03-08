@@ -1,0 +1,21 @@
+{
+	"name": "Bronze_output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "ecommerce_sales.parquet",
+				"folderPath": "Bronze",
+				"fileSystem": "c-sc1401"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
