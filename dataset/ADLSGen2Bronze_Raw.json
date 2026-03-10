@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "ecommerce_sales_raw_dataset.csv",
-				"folderPath": "Bronze/raw",
+				"folderPath": "Bronze/Raw",
 				"fileSystem": "c-sc1401"
 			},
 			"columnDelimiter": ",",
