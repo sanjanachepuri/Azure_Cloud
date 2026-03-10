@@ -1,0 +1,9 @@
+{
+	"name": "ADFSC1403",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5b9c86e4-6014-4f85-bf6e-f0c4a670953c",
+		"tenantId": "3e8ad0c9-fbe4-4a2b-be47-5945015be7c2"
+	}
+}
