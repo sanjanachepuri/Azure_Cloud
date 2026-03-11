@@ -59,6 +59,28 @@
 				]
 			}
 		],
+		"parameters": {
+			"sourceFolder": {
+				"type": "string",
+				"defaultValue": "Bronze/Raw"
+			},
+			"sourceFile": {
+				"type": "string",
+				"defaultValue": "ecommerce_sales_raw_dataset.csv"
+			},
+			"bronzeFolder": {
+				"type": "string",
+				"defaultValue": "Bronze"
+			},
+			"silverFolder": {
+				"type": "string",
+				"defaultValue": "Silver/ecommerce_clean"
+			},
+			"goldFolder": {
+				"type": "string",
+				"defaultValue": "Gold/product_summary"
+			}
+		},
 		"annotations": []
 	}
 }
