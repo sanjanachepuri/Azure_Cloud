@@ -48,15 +48,106 @@
 				"inputs": [
 					{
 						"referenceName": "ADLSGen2Bronze_Raw",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"fileName": {
+								"value": "@pipeline().parameters.sourceFile",
+								"type": "Expression"
+							},
+							"folderPath": {
+								"value": "@pipeline().parameters.sourceFolder",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "Bronze_output",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"fileName": "ecommerce_sales.parquet",
+							"folderPath": {
+								"value": "@pipeline().parameters.bronzeFolder",
+								"type": "Expression"
+							}
+						}
 					}
 				]
+			},
+			{
+				"name": "Silver",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/sanju.chepuri@gmail.com/Silver_Data_Cleaning",
+					"baseParameters": {
+						"bronze_path": {
+							"value": "@pipeline().parameters.bronzeFolder",
+							"type": "Expression"
+						},
+						"silver_path": {
+							"value": "@pipeline().parameters.silverFolder",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Gold",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Silver",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/sanju.chepuri@gmail.com/Gold_Business_Transformations",
+					"baseParameters": {
+						"silver_path": {
+							"value": "@pipeline().parameters.silverFolder",
+							"type": "Expression"
+						},
+						"gold_path": {
+							"value": "@pipeline().parameters.goldFolder",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
