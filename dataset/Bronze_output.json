@@ -5,27 +5,13 @@
 			"referenceName": "AzureDataLakeStorage2",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"fileName": {
-				"type": "string"
-			},
-			"folderPath": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().fileName",
-					"type": "Expression"
-				},
-				"folderPath": {
-					"value": "@dataset().folderPath",
-					"type": "Expression"
-				},
+				"fileName": "ecommerce_sales.parquet",
+				"folderPath": "Bronze",
 				"fileSystem": "c-sc1401"
 			},
 			"compressionCodec": "snappy"
