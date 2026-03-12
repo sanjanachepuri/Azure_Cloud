@@ -48,13 +48,7 @@
 				"inputs": [
 					{
 						"referenceName": "ADLSGen2Bronze_Raw",
-						"type": "DatasetReference",
-						"parameters": {
-							"folderPath": {
-								"value": "@pipeline().parameters.sourceFolder",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
