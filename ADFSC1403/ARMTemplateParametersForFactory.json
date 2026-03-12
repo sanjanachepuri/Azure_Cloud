@@ -1,0 +1,69 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADFSC1403"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"OnpremSqlServer2_password": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adlsgen2sc1402.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://adlsgen2sc1403.dfs.core.windows.net/"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0310-182818-p9q91j8a"
+		},
+		"AzureDatabricks2_properties_typeProperties_existingClusterId": {
+			"value": "0222-073044-b5uww8t6"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://scsqlserver.vault.azure.net/"
+		},
+		"AzureKeyVault_sqlserver_properties_typeProperties_baseUrl": {
+			"value": "https://scsqlserver.vault.azure.net/"
+		},
+		"OnpremSqlServer2_properties_typeProperties_server": {
+			"value": "SanjanaXPS2024\\MSSQLSERVER01"
+		},
+		"OnpremSqlServer2_properties_typeProperties_database": {
+			"value": "Practicedb"
+		},
+		"OnpremSqlServer2_properties_typeProperties_userName": {
+			"value": "test"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "SANJANAXPS2024\\MSSQLSERVER01"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "Practicedb"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "test"
+		},
+		"SqlServer2_AKV_properties_typeProperties_server": {
+			"value": "SANJANAXPS2024\\MSSQLSERVER01"
+		},
+		"SqlServer2_AKV_properties_typeProperties_database": {
+			"value": "Practicedb"
+		},
+		"SqlServer2_AKV_properties_typeProperties_userName": {
+			"value": "test"
+		}
+	}
+}
