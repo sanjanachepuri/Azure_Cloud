@@ -424,29 +424,14 @@
 							{
 								"referenceName": "ADLSGen2Bronze_Raw",
 								"type": "DatasetReference",
-								"parameters": {
-									"fileName": {
-										"value": "@pipeline().parameters.sourceFile",
-										"type": "Expression"
-									},
-									"folderPath": {
-										"value": "@pipeline().parameters.sourceFolder",
-										"type": "Expression"
-									}
-								}
+								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Bronze_output",
 								"type": "DatasetReference",
-								"parameters": {
-									"fileName": "ecommerce_sales.parquet",
-									"folderPath": {
-										"value": "@pipeline().parameters.bronzeFolder",
-										"type": "Expression"
-									}
-								}
+								"parameters": {}
 							}
 						]
 					},
@@ -470,17 +455,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/sanju.chepuri@gmail.com/Silver_Data_Cleaning",
-							"baseParameters": {
-								"bronze_path": {
-									"value": "@pipeline().parameters.bronzeFolder",
-									"type": "Expression"
-								},
-								"silver_path": {
-									"value": "@pipeline().parameters.silverFolder",
-									"type": "Expression"
-								}
-							}
+							"notebookPath": "/Users/sanju.chepuri@gmail.com/Silver_Data_Cleaning"
 						},
 						"linkedServiceName": {
 							"referenceName": "AzureDatabricks1",
@@ -507,17 +482,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/sanju.chepuri@gmail.com/Gold_Business_Transformations",
-							"baseParameters": {
-								"silver_path": {
-									"value": "@pipeline().parameters.silverFolder",
-									"type": "Expression"
-								},
-								"gold_path": {
-									"value": "@pipeline().parameters.goldFolder",
-									"type": "Expression"
-								}
-							}
+							"notebookPath": "/Users/sanju.chepuri@gmail.com/Gold_Business_Transformations"
 						},
 						"linkedServiceName": {
 							"referenceName": "AzureDatabricks1",
@@ -527,212 +492,6 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"sourceFolder": {
-						"type": "string",
-						"defaultValue": "Bronze/Raw"
-					},
-					"sourceFile": {
-						"type": "string",
-						"defaultValue": "ecommerce_sales_raw_dataset.csv"
-					},
-					"bronzeFolder": {
-						"type": "string",
-						"defaultValue": "Bronze"
-					},
-					"silverFolder": {
-						"type": "string",
-						"defaultValue": "Silver/ecommerce_clean"
-					},
-					"goldFolder": {
-						"type": "string",
-						"defaultValue": "Gold/product_summary"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Ecommerce_Data_Pipeline_parameters_error')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "the notebooks need to customize with parameters if we want to run this pipeline",
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "ParquetWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "ADLSGen2Bronze_Raw",
-								"type": "DatasetReference",
-								"parameters": {
-									"fileName": {
-										"value": "@pipeline().parameters.sourceFile",
-										"type": "Expression"
-									},
-									"folderPath": {
-										"value": "@pipeline().parameters.sourceFolder",
-										"type": "Expression"
-									}
-								}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Bronze_output",
-								"type": "DatasetReference",
-								"parameters": {
-									"fileName": "ecommerce_sales.parquet",
-									"folderPath": {
-										"value": "@pipeline().parameters.bronzeFolder",
-										"type": "Expression"
-									}
-								}
-							}
-						]
-					},
-					{
-						"name": "Silver",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Copy data1",
-								"dependencyConditions": [
-									"Completed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Users/sanju.chepuri@gmail.com/Silver_Data_Cleaning",
-							"baseParameters": {
-								"bronze_path": {
-									"value": "@pipeline().parameters.bronzeFolder",
-									"type": "Expression"
-								},
-								"silver_path": {
-									"value": "@pipeline().parameters.silverFolder",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Gold",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Silver",
-								"dependencyConditions": [
-									"Completed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Users/sanju.chepuri@gmail.com/Gold_Business_Transformations",
-							"baseParameters": {
-								"silver_path": {
-									"value": "@pipeline().parameters.silverFolder",
-									"type": "Expression"
-								},
-								"gold_path": {
-									"value": "@pipeline().parameters.goldFolder",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"sourceFolder": {
-						"type": "string",
-						"defaultValue": "Bronze/Raw"
-					},
-					"sourceFile": {
-						"type": "string",
-						"defaultValue": "ecommerce_sales_raw_dataset.csv"
-					},
-					"bronzeFolder": {
-						"type": "string",
-						"defaultValue": "Bronze"
-					},
-					"silverFolder": {
-						"type": "string",
-						"defaultValue": "Silver/ecommerce_clean"
-					},
-					"goldFolder": {
-						"type": "string",
-						"defaultValue": "Gold/product_summary"
-					}
 				},
 				"annotations": []
 			},
@@ -1283,6 +1042,24 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/OnpremSqlServer2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1')]"
 			]
 		}
 	]
